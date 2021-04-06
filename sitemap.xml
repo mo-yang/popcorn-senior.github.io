@@ -2,35 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/music/index.html</loc>
+    <loc>https://popcorn-senior.github.io/video/index.html</loc>
     
     <lastmod>2021-04-06</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/link/index.html</loc>
+    <loc>https://popcorn-senior.github.io/about/index.html</loc>
+    
+    <lastmod>2021-04-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://popcorn-senior.github.io/posts/4a17b156/</loc>
+    
+    <lastmod>2021-04-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://popcorn-senior.github.io/music/index.html</loc>
+    
+    <lastmod>2021-04-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://popcorn-senior.github.io/link/index.html</loc>
     
     <lastmod>2021-04-05</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/tags/index.html</loc>
+    <loc>https://popcorn-senior.github.io/tags/index.html</loc>
     
     <lastmod>2021-04-05</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/categories/index.html</loc>
-    
-    <lastmod>2021-04-05</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/posts/4a17b156/</loc>
+    <loc>https://popcorn-senior.github.io/categories/index.html</loc>
     
     <lastmod>2021-04-05</lastmod>
     
@@ -38,7 +52,7 @@
   
 
   <url>
-    <loc>http://example.com/</loc>
+    <loc>https://popcorn-senior.github.io/</loc>
     <lastmod>2021-04-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
