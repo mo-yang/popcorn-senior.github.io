@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>function | itmoyang</title><meta name="keywords" content="JavaScript函数高级"><meta name="author" content="墨杨"><meta name="copyright" content="墨杨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第八章 函数的深扒1. argumentsarguments是再函数作用域内存在的一个类数组对象，存储函数的参数等属性。 1234567function foo(){    console.log(arguments);    for(var i &#x3D; 0;i&lt; arguments.length+2;i++){        console.log(arguments[i]);    }}fo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="function">
+<meta property="og:url" content="https://popcorn-senior.github.io/posts/caae163d/index.html">
+<meta property="og:site_name" content="itmoyang">
+<meta property="og:description" content="第八章 函数的深扒1. argumentsarguments是再函数作用域内存在的一个类数组对象，存储函数的参数等属性。 1234567function foo(){    console.log(arguments);    for(var i &#x3D; 0;i&lt; arguments.length+2;i++){        console.log(arguments[i]);    }}fo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1649186959,1535448347&fm=26&gp=0.jpg">
+<meta property="article:published_time" content="2021-04-06T07:41:08.000Z">
+<meta property="article:modified_time" content="2021-04-06T08:48:13.904Z">
+<meta property="article:author" content="墨杨">
+<meta property="article:tag" content="JavaScript函数高级">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1649186959,1535448347&fm=26&gp=0.jpg"><link rel="shortcut icon" href="/./img/favicon.png"><link rel="canonical" href="https://popcorn-senior.github.io/posts/caae163d/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-06 16:48:13'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="itmoyang" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/./img/nav.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 闲文</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/video/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1649186959,1535448347&amp;fm=26&amp;gp=0.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">itmoyang</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 闲文</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/video/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">function</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-06T07:41:08.000Z" title="发表于 2021-04-06 15:41:08">2021-04-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-06T08:48:13.904Z" title="更新于 2021-04-06 16:48:13">2021-04-06</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第八章-函数的深扒"><a href="#第八章-函数的深扒" class="headerlink" title="第八章 函数的深扒"></a>第八章 函数的深扒</h1><h2 id="1-arguments"><a href="#1-arguments" class="headerlink" title="1. arguments"></a>1. arguments</h2><p>arguments是再函数作用域内存在的一个类数组对象，存储函数的参数等属性。</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>{</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt; <span class="built_in">arguments</span>.length+<span class="number">2</span>;i++){</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[i]);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">foo(<span class="number">1</span>,<span class="number">2</span>,<span class="string">"哈哈哈"</span>,{},[<span class="number">1</span>,<span class="number">2</span>]);<span class="comment">//</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>arguments参数只有在函数作用域里面才生效，它是一个对象，但是和数组一样可以通过[0]或者[1]的方式依顺序访问函数的参数，并且具有一个length属性，访问的是函数的参数的个数。</p>
+<p>arguments里面还有属性callee，指的是函数本身，可以在函数内部调用函数自己(不推荐使用)</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>{</span><br><span class="line">    <span class="keyword">if</span>(num&gt;<span class="number">0</span>){</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">arguments</span>.callee(num-<span class="number">1</span>)+num</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> num</span><br><span class="line">}</span><br><span class="line">sum(<span class="number">100</span>);<span class="comment">//5050</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>这里不知道函数名字(匿名函数)，但是还是依旧可以调用自身。</p>
+<h2 id="2-剩余参数rest"><a href="#2-剩余参数rest" class="headerlink" title="2. 剩余参数rest"></a>2. 剩余参数rest</h2><p>现在我有一个需求：我需要一个函数，传入不定长参数，第一个参数是名字，第二个以后都是我的收益，函数返回名字加收益的总和</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">name,...rest</span>)</span>{</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;rest.length;i++){</span><br><span class="line">        sum+=rest[i];</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> name+sum</span><br><span class="line">}</span><br><span class="line">add(<span class="string">"银时"</span>,<span class="number">12</span>,<span class="number">321</span>,<span class="number">3</span>,<span class="number">123</span>,<span class="number">12</span>,<span class="number">31</span>,<span class="number">23</span>);<span class="comment">//"银时525"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>将多余的实参传入rest数组中，如果没有多余的则rest数组为空</p>
+<p>默认参数：</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name=<span class="string">"Gin"</span>,sex=<span class="string">"boy"</span>,age=<span class="number">18</span></span>)</span>{</span><br><span class="line">    <span class="keyword">var</span> o = {</span><br><span class="line">        <span class="string">"name"</span>: name,</span><br><span class="line">        <span class="string">"age"</span>: age,</span><br><span class="line">        <span class="string">"sex"</span>: sex,</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> o;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">let</span> myperson = Person(<span class="string">"银时"</span>)；<span class="comment">//{name:"银时",age:18,sex:"boy"}</span></span><br><span class="line"><span class="keyword">let</span> newperson = Person();<span class="comment">//{name:"Gin",age:18,sex:"boy"}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>用于应对不定参数或者参数残缺的接口。</p>
+<h2 id="3-箭头函数与function的区别"><a href="#3-箭头函数与function的区别" class="headerlink" title="3. 箭头函数与function的区别"></a>3. 箭头函数与function的区别</h2><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>{<span class="comment">//普通的函数声明</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">}</span><br><span class="line"><span class="keyword">var</span> foo = <span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="number">1</span>);<span class="comment">//箭头函数</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>区别： </p>
+<ol>
+<li>一个是function函数申明，一个是箭头函数函数表达式</li>
+<li>function里面有arguments，箭头函数没有arguments，用(…rest)代替</li>
+<li>箭头函数没有构造函数，this指向是外部上下文的this(无法改变)。</li>
+</ol>
+<h2 id="4-this是什么，this在function函数里面的指向"><a href="#4-this是什么，this在function函数里面的指向" class="headerlink" title="4. this是什么，this在function函数里面的指向"></a>4. this是什么，this在function函数里面的指向</h2><p>this是”这个”的意思，this指向调用函数的主体对象。</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">this</span>);<span class="comment">//window,浏览器对象</span></span><br><span class="line"><span class="comment">//这意味着他和window.console.log等价</span></span><br><span class="line"><span class="built_in">window</span>.console.log === <span class="built_in">console</span>.log;<span class="comment">//true,浏览器对象调用console.log</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>在全局中this指向window</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"window name"</span>;</span><br><span class="line"><span class="comment">//全局的name是当window存在都不会消失，跳转也不会</span></span><br><span class="line"><span class="keyword">var</span> o = {</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"this object"</span>,</span><br><span class="line">    <span class="string">"getThis"</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>===o,<span class="built_in">this</span>.name);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">o.getThis();<span class="comment">//true "this object"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>此时getThis函数是o调用的，所以函数内部的this指向o</p>
+<p>但是</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = {</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"this object"</span>,</span><br><span class="line">    <span class="string">"getThis"</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">    	<span class="built_in">console</span>.log(<span class="built_in">this</span>===o,<span class="built_in">this</span>.name);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">"window name"</span>;</span><br><span class="line"><span class="keyword">var</span> fn = o.getThis;</span><br><span class="line">fn();<span class="comment">//false "window name"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>为什么此时就变成了false了呢。因为fn获得是一个函数。现在调用fn()则变成了window.fn()，此时的this指向了window，调用函数的主体是window，this.name===window.name，变成了”window name”。</p>
+<h2 id="5-this在箭头函数里的指向，this的作用是什么"><a href="#5-this在箭头函数里的指向，this的作用是什么" class="headerlink" title="5. this在箭头函数里的指向，this的作用是什么"></a>5. this在箭头函数里的指向，this的作用是什么</h2><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"window name"</span></span><br><span class="line"><span class="keyword">var</span> o = {</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"this object"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>===o);</span><br><span class="line">        <span class="comment">//let that = this;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="function">()=&gt;</span>{</span><br><span class="line">        	<span class="built_in">console</span>.log(<span class="built_in">this</span>===that,<span class="built_in">this</span>.name);</span><br><span class="line">        }</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line">o.fn()<span class="comment">//true</span></span><br><span class="line"><span class="keyword">let</span> foo = o.fn()</span><br><span class="line">foo()<span class="comment">//true "this object"</span></span><br><span class="line"><span class="comment">//此时o.fn()是箭头函数()=&gt;{}，this指向声明阶段的上下文，也就是o</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>在普通函数中this的绑定是在执行位置绑定</p>
+<p>在箭头函数里面的this在声明阶段硬绑定到上下文中。</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"window name"</span></span><br><span class="line"><span class="keyword">var</span> o = {</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"this object"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>===o);</span><br><span class="line">        <span class="keyword">let</span> that = <span class="built_in">this</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">        	<span class="built_in">console</span>.log(<span class="built_in">this</span>===that,<span class="built_in">this</span>.name);</span><br><span class="line">        }</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line">o.fn()();<span class="comment">//true false "window name"</span></span><br><span class="line"><span class="comment">//此时o.fn()是function,执行时this指向window</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>作用</li>
+</ul>
+<p>绑定事件</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> leftBtn = <span class="built_in">document</span>.querySelector(<span class="string">".left"</span>);</span><br><span class="line">leftBtn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">    <span class="built_in">this</span>.style.backgroundColor = <span class="string">"red"</span>;<span class="comment">//点击事件触发的主体是leftBtn</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>循环绑定</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> lilist = <span class="built_in">document</span>.querySelectorAll(<span class="string">".list li"</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; lilist.length;i++){</span><br><span class="line">    lilist[i].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">    	<span class="built_in">this</span>.innerHTML = <span class="string">"666"</span>;    </span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="6-函数的name与length属性"><a href="#6-函数的name与length属性" class="headerlink" title="6. 函数的name与length属性"></a>6. 函数的name与length属性</h2><p>函数得name是函数名下面的属性，是函数的唯一标识符</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>{</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.callee.name)</span><br><span class="line">}</span><br><span class="line">foo();<span class="comment">//"name"</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.callee.name)</span><br><span class="line">}</span><br><span class="line">a();<span class="comment">//"a"</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="function">() =&gt;</span>{}</span><br><span class="line"><span class="built_in">console</span>.log(b.name);<span class="comment">//</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>函数的name属性就是函数名</p>
+<h2 id="7-arguments的length"><a href="#7-arguments的length" class="headerlink" title="7. arguments的length"></a>7. arguments的length</h2><p>函数的arguments的length属性是指参数类数组中参数的长度</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>{</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.length)</span><br><span class="line">}</span><br><span class="line">foo(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);<span class="comment">//5</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="8-this的指向修改call-apply与bind的意义"><a href="#8-this的指向修改call-apply与bind的意义" class="headerlink" title="8. this的指向修改call apply与bind的意义"></a>8. this的指向修改call apply与bind的意义</h2><p> 函数得this得指向是可以修改得。我们需要用到某些特殊得原型得方法得时候会用到call，apply还有bind强行修改。</p>
+<ul>
+<li>call/apply</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window name'</span>;</span><br><span class="line"><span class="keyword">var</span> o1 = {</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"object name"</span>,</span><br><span class="line">    getThis:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">var</span> o2 = {</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"another name"</span>,</span><br><span class="line">}</span><br><span class="line">o1.getThis();<span class="comment">//"object name"</span></span><br><span class="line"><span class="keyword">var</span> fn = o1.getThis;</span><br><span class="line">fn();<span class="comment">//"window name"</span></span><br><span class="line">fn.call(o2);<span class="comment">//"another name"</span></span><br><span class="line">fn.apply(o2);<span class="comment">//"another name"</span></span><br><span class="line">fn.call(o1);<span class="comment">//"object name"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>此时call/aplly都会使函数执行，相当于强行修改了调用函数得主体对象，在你想要得对象上借用了别的方法。方法得一处书写，到处使用。</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = {</span><br><span class="line">    <span class="string">"0"</span>:<span class="string">"123"</span>,</span><br><span class="line">    <span class="string">"1"</span>:<span class="string">"456"</span>,</span><br><span class="line">    <span class="string">"2"</span>:<span class="string">"789"</span>,</span><br><span class="line">    <span class="string">"length"</span>:<span class="number">3</span>,</span><br><span class="line">}</span><br><span class="line">o.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>{</span><br><span class="line">    <span class="built_in">console</span>.log(item);</span><br><span class="line">});<span class="comment">//此处会报错，因为对象o没有forEach方法，这是数组得方法</span></span><br><span class="line"><span class="comment">//于是</span></span><br><span class="line">[].forEach.call(o,<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>{</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">})<span class="comment">//打印"123" "456" "789"</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.forEvery = <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>{<span class="comment">//不完全方法</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i =<span class="number">0</span>;i&lt;<span class="built_in">this</span>.length;i++){</span><br><span class="line">        cb(<span class="built_in">this</span>[i]);</span><br><span class="line">    }</span><br><span class="line">}<span class="comment">//自己定义了一个方法</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].forEvery(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>{</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">})<span class="comment">//1 2 3 4</span></span><br><span class="line">[].forEvery.call(o,<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>{</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">})<span class="comment">//"123" "456" "789"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>call，apply得唯一区别</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fn.call(<span class="built_in">this</span>,x1,x2,x3,x4);<span class="comment">//函数原本参数是一个一个传进去得</span></span><br><span class="line">fn.apply(<span class="built_in">this</span>,[x1,x2,x3,x4]);<span class="comment">//函数原本参数放到数组中传进去</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>bind</li>
+</ul>
+<p>bind方法同样也可以修改函数执行得主体对象，但是bind是硬绑定，是在执行得时候返回一个绑定完成之后得函数，可以再任意地方执行</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window name'</span>;</span><br><span class="line"><span class="keyword">var</span> o1 = {</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"object name"</span>,</span><br><span class="line">    getThis:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">var</span> o2 = {</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"another name"</span>,</span><br><span class="line">}</span><br><span class="line"><span class="keyword">var</span> sayName = o1.getThis.bind(o2);<span class="comment">//返回一个绑定好得函数,啥都不返回</span></span><br><span class="line">sayName();<span class="comment">//"another name"</span></span><br><span class="line">sayName.call(o1);<span class="comment">//"another name"已经改不了了</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>其实bind得内部实现是,用到了call,或者是apply</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.mybind=<span class="function"><span class="keyword">function</span>(<span class="params">obj,...arg1</span>)</span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...arg2</span>)</span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.apply(obj,arg1.concat(arg2))</span><br><span class="line">    }</span><br><span class="line">}<span class="comment">//粗略版，返回一个函数，此函数执行返回原函数绑定到obj上得硬绑定，arg1，arg2是参数,不考虑原型链，错误, 兼容性等情况</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>原型得问题在面向对象讲。call/apply/bind问题再深入讨论</p>
+<h2 id="9-严格模式"><a href="#9-严格模式" class="headerlink" title="9.严格模式"></a>9.严格模式</h2><p>可以不是函数开头可以加一句”use strict”;让函数变成严格模式</p>
+<ul>
+<li>不允许用with。</li>
+<li>所有变量必须声明，赋值给未声明的变量报错，而不是隐匿创建全局变量。</li>
+<li>eval中的代码不能创建eval所在作用域下的变量、函数。而是为eval单独创建一个作用域，并在eval返回时丢弃。</li>
+<li>函数中的特殊对象arguments是静态副本，而不像非严格模式那样，修改arguments或修改参数变量会相互影响。</li>
+<li>删除configurable=false的属性时报错，而不是忽略。</li>
+<li>对象字面量重复属性名报错。</li>
+<li>禁止八进制字面量，如010（八进制的8）。</li>
+<li>严格模式下eval、arguments变为关键字，不能用作变量名。</li>
+<li>一般函数调用时（不是对象的方法调用，也不使用apply/call/bind等修改this）this指向null，而不是全局变量。</li>
+<li>试图修改不可写属性（writable=false），在不可扩展的对象上添加属性时报TypeError，而不是忽略。</li>
+<li>arguments.caller,arguements.callee被禁用</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">墨杨</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://popcorn-senior.github.io/posts/caae163d/">https://popcorn-senior.github.io/posts/caae163d/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://popcorn-senior.github.io" target="_blank">itmoyang</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7/">JavaScript函数高级</a></div><div class="post_share"><div class="social-share" data-image="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1649186959,1535448347&amp;fm=26&amp;gp=0.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/4a17b156/"><img class="prev-cover" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1234940918,4035050611&amp;fm=26&amp;gp=0.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hello World</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/./img/nav.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">墨杨</div><div class="author-info__description">七岁的那一年，抓住那只蝉,以为能抓住夏天</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/popcorn-senior"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/popcorn-senior" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:416299314@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%87%BD%E6%95%B0%E7%9A%84%E6%B7%B1%E6%89%92"><span class="toc-number">1.</span> <span class="toc-text">第八章 函数的深扒</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-arguments"><span class="toc-number">1.1.</span> <span class="toc-text">1. arguments</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%89%A9%E4%BD%99%E5%8F%82%E6%95%B0rest"><span class="toc-number">1.2.</span> <span class="toc-text">2. 剩余参数rest</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8Efunction%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.3.</span> <span class="toc-text">3. 箭头函数与function的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-this%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8Cthis%E5%9C%A8function%E5%87%BD%E6%95%B0%E9%87%8C%E9%9D%A2%E7%9A%84%E6%8C%87%E5%90%91"><span class="toc-number">1.4.</span> <span class="toc-text">4. this是什么，this在function函数里面的指向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-this%E5%9C%A8%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E9%87%8C%E7%9A%84%E6%8C%87%E5%90%91%EF%BC%8Cthis%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.5.</span> <span class="toc-text">5. this在箭头函数里的指向，this的作用是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%87%BD%E6%95%B0%E7%9A%84name%E4%B8%8Elength%E5%B1%9E%E6%80%A7"><span class="toc-number">1.6.</span> <span class="toc-text">6. 函数的name与length属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-arguments%E7%9A%84length"><span class="toc-number">1.7.</span> <span class="toc-text">7. arguments的length</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-this%E7%9A%84%E6%8C%87%E5%90%91%E4%BF%AE%E6%94%B9call-apply%E4%B8%8Ebind%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">1.8.</span> <span class="toc-text">8. this的指向修改call apply与bind的意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.9.</span> <span class="toc-text">9.严格模式</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/4a17b156/" title="Hello World"><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1234940918,4035050611&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/posts/4a17b156/" title="Hello World">Hello World</a><time datetime="2021-04-06T08:50:43.519Z" title="发表于 2021-04-06 16:50:43">2021-04-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/caae163d/" title="function"><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1649186959,1535448347&amp;fm=26&amp;gp=0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="function"/></a><div class="content"><a class="title" href="/posts/caae163d/" title="function">function</a><time datetime="2021-04-06T07:41:08.000Z" title="发表于 2021-04-06 15:41:08">2021-04-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 墨杨</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'joPBVvLN8RM6CYwdKjBNiBac-gzGzoHsz',
+      appKey: 'SgMokmuYKlaMjxPi8xBKzs5n',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'https://popcorn-senior.github.io/posts/caae163d/'
+    this.page.identifier = 'posts/caae163d/'
+    this.page.title = 'function'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+}
+
+if ('Valine' === 'Disqus' || !false) {
+  if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="false" async="async"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
